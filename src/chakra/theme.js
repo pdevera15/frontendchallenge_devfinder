@@ -15,13 +15,28 @@ const colors = {
 }
 
 const components = {
-  Input: {
-    variants: {
-      "search-input": {
-        height: "26px",
-        fontColor: "black",
-        backgroundColor: "black",
+  Button: {
+    baseStyle: {
+      width: "106px",
+      height: "50px",
+      backgroundColor: colors.blue,
+      color: colors.white[100],
+      margin: "12.5px, 23px",
+    },
+    sizes: {
+      sm: {
+        fontSize: "16px",
+        fontWeight: "normal",
       },
+    },
+    defaultProps: {
+      sizes: "sm",
+    },
+  },
+  InputGroup: {
+    baseStyle: {
+      height: "69px",
+      padding: "20px",
     },
   },
   Heading: {
@@ -35,8 +50,16 @@ const components = {
   },
   Toggle: {
     baseStyle: ({ colorMode }) => ({
-      fontColor: "red",
-      _hover: "#4B6A9B",
+      color: colorMode === "light" ? colors.navyBlue : colors.white[100],
+      path: {
+        fill: colorMode === "light" ? colors.navyBlue : colors.white[100],
+      },
+      _hover: {
+        color: colorMode === "light" ? "black" : colors.navyBlue,
+        path: {
+          fill: colorMode === "light" ? "black" : colors.navyBlue,
+        },
+      },
       cursor: "pointer",
       display: "flex",
       width: "89px",

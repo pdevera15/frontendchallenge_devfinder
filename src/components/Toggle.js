@@ -5,11 +5,11 @@ import { useColorMode, useStyleConfig } from "@chakra-ui/react"
 
 function Toggle() {
   const { colorMode, toggleColorMode } = useColorMode()
-  const styles = useStyleConfig("Toggle")
+  const toggleStyles = useStyleConfig("Toggle")
 
   return (
     <Center>
-      <Box onClick={toggleColorMode} __css={styles}>
+      <Box onClick={toggleColorMode} __css={toggleStyles}>
         {colorMode === "light" ? "LIGHT" : "DARK"}
         <Spacer />
         {colorMode === "light" ? <Sun /> : <Moon />}
