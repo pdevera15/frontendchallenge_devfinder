@@ -33,12 +33,6 @@ const components = {
       sizes: "sm",
     },
   },
-  InputGroup: {
-    baseStyle: {
-      height: "69px",
-      padding: "20px",
-    },
-  },
   Heading: {
     variants: {
       "page-title": {
