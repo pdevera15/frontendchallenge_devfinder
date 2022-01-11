@@ -4,21 +4,35 @@ import {
   InputLeftElement,
   InputRightElement,
   Button,
+  Flex,
 } from "@chakra-ui/react"
 import { ReactComponent as SearchIcon } from "../assets/icon-search.svg"
 
 function SearhBar() {
   return (
-    <InputGroup h="auto">
-      <InputLeftElement
-        w="auto"
-        h="auto"
-        ml="23px"
-        my="23px"
-        pointerEvents="none"
-        children={<SearchIcon />}
+    <InputGroup
+      h="auto"
+      backgroundColor="#fff"
+      boxShadow="md"
+      borderRadius="15px"
+    >
+      <Flex>
+        <InputLeftElement
+          w="auto"
+          h="auto"
+          ml="23px"
+          alignItems={"center"}
+          pointerEvents="none"
+          children={<SearchIcon />}
+        />
+      </Flex>
+      <Input
+        h={69}
+        pl={"80px"}
+        border="none"
+        borderRadius="15px"
+        placeholder="Search Github username..."
       />
-      <Input h={69} pl="80px" />
       <InputRightElement
         w="auto"
         h="auto"
