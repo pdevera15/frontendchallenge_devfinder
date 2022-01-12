@@ -16,22 +16,12 @@ const colors = {
 
 const components = {
   Button: {
-    baseStyle: {
+    baseStyle: ({ colorMode }) => ({
       width: "106px",
-      height: "50px",
       backgroundColor: colors.blue,
       color: colors.white[100],
-      margin: "12.5px, 23px",
-    },
-    sizes: {
-      sm: {
-        fontSize: "16px",
-        fontWeight: "normal",
-      },
-    },
-    defaultProps: {
-      sizes: "sm",
-    },
+      _hover: { backgroundColor: "#60ABFF" },
+    }),
   },
   Heading: {
     variants: {
@@ -40,6 +30,19 @@ const components = {
         lineHeight: "38px",
         fontWeight: "bold",
       },
+    },
+  },
+  Input: {
+    baseStyle: ({ colorMode }) => ({
+      field: {
+        backgroundColor:
+          colorMode === "light" ? colors.white : colors.blackBlue,
+        boxShadow: "md",
+        borderRadius: "15px",
+      },
+    }),
+    defaultProps: {
+      variant: null,
     },
   },
   Toggle: {
@@ -73,7 +76,7 @@ const fonts = {
 const styles = {
   global: ({ colorMode }) => ({
     body: {
-      backgroundColor: colorMode === "light" ? "lightWhite" : "blackBlue",
+      backgroundColor: colorMode === "light" ? colors.lightWhite : colors.black,
       fontSize: { base: "15px" },
       lineHeight: "25px",
     },
