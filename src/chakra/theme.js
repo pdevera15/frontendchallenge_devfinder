@@ -15,13 +15,22 @@ const colors = {
 }
 
 const components = {
+  Box: {
+    variants: {
+      "search-result": {},
+    },
+  },
   Button: {
-    baseStyle: ({ colorMode }) => ({
+    baseStyle: {
       width: "106px",
-      backgroundColor: colors.blue,
       color: colors.white[100],
       _hover: { backgroundColor: "#60ABFF" },
-    }),
+    },
+    variants: {
+      "search-button": {
+        backgroundColor: colors.blue,
+      },
+    },
   },
   Heading: {
     variants: {
@@ -36,13 +45,17 @@ const components = {
     baseStyle: ({ colorMode }) => ({
       field: {
         backgroundColor:
-          colorMode === "light" ? colors.white : colors.blackBlue,
+          colorMode === "light" ? colors.white[100] : colors.blackBlue,
         boxShadow: "md",
         borderRadius: "15px",
+        "::placeholder": {
+          color: colorMode === "light" ? colors.navyBlue : colors.white[100],
+        },
       },
     }),
     defaultProps: {
       variant: null,
+      size: "md",
     },
   },
   Toggle: {

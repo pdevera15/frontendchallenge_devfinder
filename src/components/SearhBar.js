@@ -16,7 +16,6 @@ function SearhBar() {
         w="auto"
         h="100%"
         pl="32px"
-        pr="inherit"
         pointerEvents="none"
         children={<SearchIcon />}
       />
@@ -27,10 +26,12 @@ function SearhBar() {
         pr="10px"
         children={
           <Box display="flex" alignItems="center">
-            <Text mr="4" color="red">
+            <Text mr="4" color="red" display="none">
               No User Found
             </Text>
-            <Button h="50px">Search</Button>
+            <Button h="50px" variant={"search-button"}>
+              Search
+            </Button>
           </Box>
         }
       ></InputRightElement>
