@@ -79,6 +79,25 @@ const components = {
       lineHeight: "19.5px",
     }),
   },
+  ResultBox: {
+    baseStyle: ({ colorMode }) => ({
+      padding: "48px",
+      marginTop: "24px",
+      borderRadius: "15px",
+      boxShadow: "sm",
+      backgroundColor:
+        colorMode === "light" ? colors.white[100] : colors.blackBlue,
+    }),
+  },
+  StatusBox: {
+    baseStyle: ({ colorMode }) => ({
+      width: "100%",
+      backgroundColor: colorMode === "light" ? colors.lightWhite : colors.black,
+      borderRadius: "md",
+      px: "32px",
+      py: "15px",
+    }),
+  },
 }
 
 const fonts = {
@@ -101,6 +120,7 @@ const styles = {
     h3: {
       fontSize: { base: "16px" },
       lineHeight: "24px",
+      color: colors.blue,
     },
     h4: {
       fontSize: { base: "13px" },
