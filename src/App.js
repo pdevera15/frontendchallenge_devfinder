@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react"
 import axios from "axios"
 import Socials from "./components/Socials"
+
 function App() {
   const [data, setData] = useState({})
   useEffect(() => {
@@ -29,7 +30,10 @@ function App() {
 
   return (
     <>
-      <Container maxW={["container.sm"]}>
+      <Container
+        minW={{ sm: "327px", md: "573px", lg: "730px" }}
+        p={{ sm: "24px" }}
+      >
         <Flex>
           <Heading as="h1" variant="page-title">
             devfinder
@@ -39,8 +43,8 @@ function App() {
         </Flex>
         <SearchBar />
 
-        <Box __css={Resultstyle}>
-          <Flex gap={"37px"}>
+        <Box __css={Resultstyle} py={["32px", "40px"]} px={["24px", "40px"]}>
+          <Flex gap={"19px"} mb="33px">
             <Box>
               <Image
                 src={data.avatar_url}
@@ -51,22 +55,27 @@ function App() {
               />
             </Box>
             <Box flexGrow={"1"}>
-              {console.log(data)}
-              <h2>{data.name}</h2>
-              <h3>
-                <Link href={data.html_url}>{`@${data.login}`} </Link>
-              </h3>
-              <h4>
-                {data.bio === null ? (
-                  <>This profile has no bio</>
-                ) : (
-                  <>{data.bio}</>
-                )}
-              </h4>
-              <StatusBox data={data} />
-              <Socials data={data} />
+              <Box>
+                {console.log(data)}
+                <h2>{data.name}</h2>
+                <h3>
+                  <Link href={data.html_url}>{`@${data.login}`} </Link>
+                </h3>
+                <h4>{data.created_at}</h4>
+              </Box>
             </Box>
           </Flex>
+          <Box mb="23px">
+            <h4>
+              {data.bio === null ? (
+                <>This profile has no bio</>
+              ) : (
+                <>{data.bio}</>
+              )}
+            </h4>
+          </Box>
+          <StatusBox data={data} />
+          <Socials data={data} />
         </Box>
       </Container>
     </>

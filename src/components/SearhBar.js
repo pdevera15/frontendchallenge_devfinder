@@ -6,10 +6,13 @@ import {
   Button,
   Text,
   Box,
+  useBreakpointValue,
 } from "@chakra-ui/react"
 import { ReactComponent as SearchIcon } from "../assets/icon-search.svg"
 
 function SearhBar() {
+  const breakPointSize = useBreakpointValue(["sm", "md"])
+  console.log(breakPointSize)
   return (
     <InputGroup>
       <InputLeftElement
@@ -19,7 +22,11 @@ function SearhBar() {
         pointerEvents="none"
         children={<SearchIcon />}
       />
-      <Input h="69px" pl="80px" placeholder="Search Github username..." />
+      <Input
+        pl="80px"
+        size={breakPointSize}
+        placeholder="Search Github username..."
+      />
       <InputRightElement
         w="auto"
         h="100%"
@@ -29,9 +36,7 @@ function SearhBar() {
             <Text mr="4" color="red" display="none">
               No User Found
             </Text>
-            <Button h="50px" variant={"search-button"}>
-              Search
-            </Button>
+            <Button size={breakPointSize}>Search</Button>
           </Box>
         }
       ></InputRightElement>

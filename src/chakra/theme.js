@@ -1,4 +1,4 @@
-import { extendTheme } from "@chakra-ui/react"
+import { extendTheme, withDefaultColorScheme } from "@chakra-ui/react"
 import "@fontsource/space-mono"
 
 const config = { initialColorMode: "light", useSystemColorMode: false }
@@ -15,20 +15,22 @@ const colors = {
 }
 
 const components = {
-  Box: {
-    variants: {
-      "search-result": {},
-    },
-  },
   Button: {
     baseStyle: {
-      width: "106px",
+      backgroundColor: colors.blue,
       color: colors.white[100],
       _hover: { backgroundColor: "#60ABFF" },
     },
-    variants: {
-      "search-button": {
-        backgroundColor: colors.blue,
+    sizes: {
+      sm: {
+        width: "84px",
+        height: "46px",
+        fontSize: "14px",
+      },
+      md: {
+        width: "106px",
+        height: "50px",
+        fontSize: "16px",
       },
     },
   },
@@ -53,6 +55,22 @@ const components = {
         },
       },
     }),
+    sizes: {
+      sm: {
+        field: {
+          height: "60px",
+          fontSize: "13px",
+          lineHeight: "25px",
+        },
+      },
+      md: {
+        field: {
+          height: "69px",
+          fontSize: "18px",
+          lineHeight: "25px",
+        },
+      },
+    },
     defaultProps: {
       variant: null,
       size: "md",
@@ -81,7 +99,6 @@ const components = {
   },
   ResultBox: {
     baseStyle: ({ colorMode }) => ({
-      padding: "48px",
       marginTop: "24px",
       borderRadius: "15px",
       boxShadow: "sm",
@@ -97,6 +114,14 @@ const components = {
       px: "32px",
       py: "15px",
     }),
+  },
+  Socials: {
+    baseStyle: {
+      display: "flex",
+      gap: "19px",
+      fontSize: "15px",
+      lineHeight: "22.22px",
+    },
   },
 }
 
@@ -129,5 +154,14 @@ const styles = {
   }),
 }
 
-const theme = extendTheme({ config, components, styles, fonts, colors })
+const theme = extendTheme(
+  withDefaultColorScheme({ colorScheme: "blue", components: ["Button"] }),
+  {
+    config,
+    components,
+    styles,
+    fonts,
+    colors,
+  }
+)
 export default theme
