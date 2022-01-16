@@ -121,6 +121,15 @@ const components = {
       gap: "19px",
       fontSize: "15px",
       lineHeight: "22.22px",
+      wordBreak: "break-word",
+    },
+    variants: {
+      notAvailable: {
+        color: colors.gray,
+        path: {
+          fill: colors.gray,
+        },
+      },
     },
   },
 }

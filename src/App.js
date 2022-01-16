@@ -1,84 +1,109 @@
 import { useState, useEffect } from "react"
-import SearchBar from "./components/SearhBar"
 import Toggle from "./components/Toggle"
-import StatusBox from "./components/StatusBox"
 import {
+  Box,
   Container,
   Flex,
   Spacer,
   Heading,
-  Box,
+  useBreakpointValue,
   useStyleConfig,
-  Image,
-  Link,
+  InputGroup,
+  InputLeftElement,
+  InputRightElement,
+  Input,
+  Text,
+  Button,
 } from "@chakra-ui/react"
+import { ReactComponent as SearchIcon } from "./assets/icon-search.svg"
 import axios from "axios"
-import Socials from "./components/Socials"
+import LayoutSm from "./layout/LayoutSm"
+import LayoutMd from "./layout/LayoutMd"
 
 function App() {
+  const breakPointSize = useBreakpointValue(["sm", "md"])
   const [data, setData] = useState({})
+  const [searchInput, setSearchInput] = useState({})
+  const [noResult, setNoResult] = useState(false)
+
+  const Resultstyle = useStyleConfig("ResultBox")
+  const fetchData = async (username) => {
+    return await axios.get(`https://api.github.com/users/${username}`)
+  }
+  const handleSearch = () => {
+    fetchData(searchInput)
+      .then(({ data }) => setData(data))
+      .catch((e) => setNoResult(true))
+  }
   useEffect(() => {
-    const fetchData = async () => {
-      return await axios.get("https://api.github.com/users/octocat")
-    }
-    fetchData()
+    fetchData("octocat")
       .then(({ data }) => setData(data))
       .catch((e) => console.log(e))
   }, [])
-
-  const Resultstyle = useStyleConfig("ResultBox")
-
+  console.log(breakPointSize)
   return (
-    <>
+    <Flex alignItems={"center"} height={"100vh"} m={["24px"]}>
       <Container
         minW={{ sm: "327px", md: "573px", lg: "730px" }}
-        p={{ sm: "24px" }}
+        p={"0px"}
+        m={"auto"}
       >
-        <Flex>
-          <Heading as="h1" variant="page-title">
-            devfinder
-          </Heading>
-          <Spacer />
-          <Toggle />
-        </Flex>
-        <SearchBar />
-
-        <Box __css={Resultstyle} py={["32px", "40px"]} px={["24px", "40px"]}>
-          <Flex gap={"19px"} mb="33px">
-            <Box>
-              <Image
-                src={data.avatar_url}
-                alt="Profile"
-                h={"117px"}
-                w={"117px"}
-                borderRadius={"full"}
-              />
-            </Box>
-            <Box flexGrow={"1"}>
-              <Box>
-                {console.log(data)}
-                <h2>{data.name}</h2>
-                <h3>
-                  <Link href={data.html_url}>{`@${data.login}`} </Link>
-                </h3>
-                <h4>{data.created_at}</h4>
-              </Box>
-            </Box>
+        <Box mb="36px">
+          <Flex>
+            <Heading as="h1" variant="page-title">
+              devfinder
+            </Heading>
+            <Spacer />
+            <Toggle />
           </Flex>
-          <Box mb="23px">
-            <h4>
-              {data.bio === null ? (
-                <>This profile has no bio</>
-              ) : (
-                <>{data.bio}</>
-              )}
-            </h4>
-          </Box>
-          <StatusBox data={data} />
-          <Socials data={data} />
+        </Box>
+
+        <InputGroup>
+          <InputLeftElement
+            w="auto"
+            h="100%"
+            pl={["16px", "32px"]}
+            pointerEvents="none"
+            children={<SearchIcon />}
+          />
+          <Input
+            pr={noResult === true ? "290px" : "130px"}
+            pl={["45px", "80px"]}
+            size={breakPointSize}
+            placeholder="Search Github username..."
+            onChange={(e) => {
+              setSearchInput(e.target.value)
+            }}
+          />
+          <InputRightElement
+            w="auto"
+            h="100%"
+            pr="10px"
+            children={
+              <Box display="flex" alignItems="center">
+                <Text
+                  mr="4"
+                  color="red"
+                  display={noResult === true ? "block" : "none"}
+                >
+                  No User Found
+                </Text>
+                <Button onClick={() => handleSearch()} size={breakPointSize}>
+                  Search
+                </Button>
+              </Box>
+            }
+          ></InputRightElement>
+        </InputGroup>
+        <Box __css={Resultstyle} py={["32px", "40px"]} px={["24px", "40px"]}>
+          {breakPointSize === "sm" ? (
+            <LayoutSm data={data} />
+          ) : (
+            <LayoutMd data={data} />
+          )}
         </Box>
       </Container>
-    </>
+    </Flex>
   )
 }
 
